@@ -38,7 +38,7 @@ export const Home = () => {
                 delights, we offer an extensive selection of French wines,
                 meticulously chosen to enhance your dining pleasure. Join us and
                 savor the unparalleled sophistication and charm of French
-                cuisine in a warm and inviting atmosphere.
+                cuisine in a warm and inviting atmosphere
                 <br />
                 <br />
                 /Team Matkoma
