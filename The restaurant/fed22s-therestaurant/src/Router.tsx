@@ -11,6 +11,7 @@ import { BookingView } from './components/BookingView/BookingView';
 import { DeleteBooking } from './components/DeleteBooking/DeleteBooking';
 //import { AddBooking } from "./components/AddBooking/AddBooking";
 import { UpdateBooking } from './components/UpdateBooking/UpdateBooking';
+import { BN_Main } from './pages/Bakfull.nu Main/BN_Main';
 
 export const router = createBrowserRouter([
   {
@@ -37,4 +38,9 @@ export const router = createBrowserRouter([
     path: '/admin',
     element: <Admin></Admin>,
   },
+
+  {
+    path: '/BN_Main',
+    element: <BN_Main></BN_Main>,
+  }
 ]);
