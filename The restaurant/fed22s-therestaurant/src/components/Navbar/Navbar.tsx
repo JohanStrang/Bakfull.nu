@@ -35,6 +35,12 @@ export const Navbar = () => {
           </li>
 
           <li className="nav-item">
+            <Link to="/BN_Main" className="nav-link">
+              BN_Main
+            </Link>
+          </li>
+
+          <li className="nav-item">
             <Link to="/booking" className="nav-link">
               Booking
             </Link>

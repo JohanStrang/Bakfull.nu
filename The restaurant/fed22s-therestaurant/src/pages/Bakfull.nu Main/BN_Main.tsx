@@ -3,7 +3,9 @@ export const BN_Main = () => {
     return (
         <>
         <Navbar></Navbar>
-        <main></main>
+        <main>
+            
+        </main>
         </>
     )
 }
