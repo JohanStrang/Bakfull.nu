@@ -10,7 +10,7 @@ import { BookingForm } from './components/BookingForm/BookingForm';
 import { BookingView } from './components/BookingView/BookingView';
 import { DeleteBooking } from './components/DeleteBooking/DeleteBooking';
 //import { AddBooking } from "./components/AddBooking/AddBooking";
-import { UpdateBooking } from './components/UpdateBooking/UpdateBooking';
+//import { UpdateBooking } from './components/UpdateBooking/UpdateBooking';
 
 export const router = createBrowserRouter([
   {

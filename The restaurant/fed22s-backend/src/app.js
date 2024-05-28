@@ -6,6 +6,11 @@ const cors = require('cors');
 const bookingRoutes = require('./routes/bookingRoutes');
 const guestRoutes = require('./routes/guestRoutes');
 
+// BN routes
+const orderRoutes = require('./routes/BN_orderRoutes');
+const cleanerRoutes = require('./routes/BN_cleanerRoutes');
+const menuRoutes = require('./routes/BN_menuRoutes');
+
 const app = express();
 
 app.use(express.json());
@@ -31,6 +36,11 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/bookings', bookingRoutes);
 app.use('/api/v1/guests', guestRoutes);
+
+// BN
+app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/cleaners', cleanerRoutes);
+app.use('/api/v1/menus', menuRoutes);
 
 const port = 3000;
 const run = async () => {

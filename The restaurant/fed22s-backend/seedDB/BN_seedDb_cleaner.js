@@ -2,14 +2,11 @@ require('dotenv').config();
 
 const mongoose = require('mongoose');
 
-const Booking = require('../src/models/ResBooking.js');
-const { booking } = require('./mockdata/booking');
-
 //BN
 const Cleaner = require('../src/models/BN_Cleaner.js');
 const { cleaner } = require('./mockdata/BN_cleaner.js');
-const Menu = require('../src/models/BN_Menu.js');
-const { menu } = require('./mockdata/BN_menu.js');
+//const Menu = require('../src/models/BN_Menu.js');
+//const { menu } = require('./mockdata/BN_menu.js');
 
 const populateDbWithMockData = async () => {
   try {
@@ -19,15 +16,13 @@ const populateDbWithMockData = async () => {
 
     console.log(`MongoDB connected: ${conn.connection.host}`);
 
-    const bookingRes = await Booking.create(booking);
-
     //BN
     const cleanerRes = await Cleaner.create(cleaner);
-    const menuRes = await Menu.create(menu);
+    //const menuRes = await Menu.create(menu);
 
-    console.log('Database successfully populated with funny items');
+    console.log('Database successfully populated with mock-cleaners');
 
-    return bookingRes;
+    return cleanerRes;
   } catch (error) {
     console.error(error);
   } finally {
