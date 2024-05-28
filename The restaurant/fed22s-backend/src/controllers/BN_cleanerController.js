@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Order = require("../models/BN_Ordert");
+const Order = require("../models/BN_Order");
 const Cleaner = require("../models/BN_Cleaner");
 const Menu = require("../models/BN_Menu");
 const Admin = require("../models/Admin");

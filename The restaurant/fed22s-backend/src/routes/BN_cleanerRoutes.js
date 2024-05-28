@@ -8,7 +8,7 @@ const {
   updateCleanerById,
   createNewCleaner,
   deleteCleanerById,
-} = require("../controllers/cleanerController");
+} = require("../controllers/BN_cleanerController");
 
 //api/v1/cleaners
 router.get("/", getAllCleaners);

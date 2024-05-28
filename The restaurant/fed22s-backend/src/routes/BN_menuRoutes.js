@@ -8,7 +8,7 @@ const {
   updateMenuById,
   createNewMenu,
   deleteMenuById,
-} = require("../controllers/cleanerController");
+} = require("../controllers/BN_cleanerController");
 
 //api/v1/menues
 router.get("/", getAllMenues);

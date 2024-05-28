@@ -7,9 +7,9 @@ const bookingRoutes = require('./routes/bookingRoutes');
 const guestRoutes = require('./routes/guestRoutes');
 
 // BN routes
-const orderRoutes = require('./routes/BN_orderRoutes');
-const cleanerRoutes = require('./routes/BN_cleanerRoutes');
-const menuRoutes = require('./routes/BN_menuRoutes');
+const orderRoutes = require('./routes/BN_cleanerRoutes');
+const cleanerRoutes = require('../src/routes/BN_cleanerRoutes');
+const menuRoutes = require('../src/routes/BN_menuRoutes');
 
 const app = express();
 
