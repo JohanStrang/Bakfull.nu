@@ -1,0 +1,21 @@
+
+
+.add-container {
+    margin: 4px, 4px;
+    padding: 4px;
+    width: auto;
+    height: 800px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    
+}
+
+.add-box {
+    width: 265px;
+    height: 200px;
+    background-color: rgb(0, 183, 255);
+    padding: 4px;
+    margin: 8px;
+    float:inline-start;
+}
