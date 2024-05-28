@@ -4,14 +4,8 @@ const Schema = mongoose.Schema;
 
 const menuSchema = new Schema(
     
-  {  menuID: {
+  {  menuId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "menuID",
-      },
-
-      restuarantID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "restaurantID",
       },
 
   restaurantName: {
@@ -45,11 +39,6 @@ restaurantCity: {
   },
 
   restaurantContact: {
-    type: String,
-    required: true,
-  },
-
-  menuItem: {
     type: String,
     required: true,
   },

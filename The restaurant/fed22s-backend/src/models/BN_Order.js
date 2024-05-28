@@ -6,13 +6,13 @@ const Menu = require("./BN_Menu");
 
 const orderSchema = new Schema(
     
-  {  orderID: {
+  {  orderId: {
         type: mongoose.Schema.Types.ObjectId,
       },
 
-      customerID: {
-        type: mongoose.Schema.Types.ObjectId,
-      },
+ //     customerID: {
+ //       type: mongoose.Schema.Types.ObjectId,
+ //     },
 
   customerName: {
     type: String,
@@ -39,19 +39,19 @@ customerCity: {
     required: true,
   },
 
-  cleanerOrderID: {
+  cleanerOrderId: {
     type: Number,
     ref: "Cleaner",
   },
 
-  orderCleanerPrize: {
+  cleanerPrize: {
     type: Number,
   },
 
-  menu: [{
+  menuId: {
     type: Number,
     ref: "Menu",
-  }],
+  },
 
   menuPrizeTotal: {
     type: Number,

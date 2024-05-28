@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 
 const cleanerSchema = new Schema(
     
-  {  orderCleanerID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "OrderCleanerID",
-      },
+  {  
+    
+    cleanerOrderId: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
 
-    cleanerID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "cleanerID",
-      },
+ //  cleanerId: {
+ //       type: mongoose.Schema.Types.ObjectId,
+ //     },
 
   cleanerName: {
     type: String,
@@ -45,11 +45,6 @@ const cleanerSchema = new Schema(
   },
 
   cleanerContact: {
-    type: String,
-    required: true,
-  },
-
-  cleanerItem: {
     type: String,
     required: true,
   },
