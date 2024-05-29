@@ -95,6 +95,8 @@ exports.createNewMenu = async (req, res) => {
     restaurantContact,
     menuDescription,
     menuPrize,
+    restaurantUserName,
+    restaurantPassword,
   } = req.body;
 
   try {
@@ -105,7 +107,6 @@ exports.createNewMenu = async (req, res) => {
 
 
     const newMenu = await Menu.create({
-      menuId: newMenu._id,
       restaurantName: restaurantName,
       restaurantAddress: restaurantAddress,
       restaurantPostalCode: restaurantPostalCode,
@@ -115,6 +116,8 @@ exports.createNewMenu = async (req, res) => {
       restaurantContact: restaurantContact,
       menuDescription: menuDescription,
       menuPrize: menuPrize,
+      restaurantUserName: restaurantUserName,
+      restaurantPassword: restaurantPassword,
     });
 
     console.log("Creating new menu item and restaurant");

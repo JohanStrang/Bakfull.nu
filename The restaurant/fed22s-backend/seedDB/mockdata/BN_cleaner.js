@@ -12,6 +12,8 @@ exports.cleaner = [
       cleanerContact: 'Kalle Karlsson',
       cleanerDescription: 'Full röjning',
       cleanerPrize: 300,
+      cleanerUserName: 'Kalle',
+      cleanerPassword: '2024',
   },
 
   {
@@ -24,6 +26,8 @@ exports.cleaner = [
     cleanerContact: 'Lisa Larsson',
     cleanerDescription: 'Full röjning och putsning',
     cleanerPrize: 400,
+    cleanerUserName: 'Lisa',
+    cleanerPassword: '2024',
 },
 
 ];

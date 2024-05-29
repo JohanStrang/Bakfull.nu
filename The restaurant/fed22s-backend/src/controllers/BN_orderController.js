@@ -18,7 +18,8 @@ const orderCollection = require("../models/BN_Order");
 
 exports.getAllOrders = async (req, res) => {
   try {
-    const order = await Order.find().populate("menu").populate("cleaner");
+    //const order = await Order.find().populate("menu").populate("cleaner");
+    const order = await Order.find();
     console.log(order);
     //console.log(guest);
     if (!order) throw new NotFoundError("No order exist!");
@@ -75,6 +76,8 @@ exports.getOrderByMenu = async (req, res) => {
 
 exports.createNewOrder = async (req, res) => {
   const {
+      OrderDate,
+      OrderTime,
       customerName,
       customerAddress,
       customerPostalCode,
@@ -94,13 +97,14 @@ exports.createNewOrder = async (req, res) => {
   } = req.body;
 
   try {
-    if (!customerName || !customerAddress || !customerPostalCode || !customerCity || !customerPhone) {
-      return res.status(400).json({ error: "Missing required fields" });
-    };
+    //if (!customerName || !customerAddress || !customerPostalCode || !customerCity || !customerPhone) {
+    //  return res.status(400).json({ error: "Missing required fields" });
+   // };
 
 
     const newOrder = await Order.create({
-      orderId: newOrder._id,
+      OrderDate: OrderDate,
+      OrderTime: OrderTime,
       customerName: customerName,
       customerAddress: customerAddress,
       customerPostalCode: customerPostalCode,

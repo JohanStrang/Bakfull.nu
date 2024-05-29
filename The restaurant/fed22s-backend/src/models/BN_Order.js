@@ -10,38 +10,37 @@ const orderSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
       },
 
- //     customerID: {
- //       type: mongoose.Schema.Types.ObjectId,
- //     },
+
+ OrderDate: {
+  type: String,
+},
+
+OrderTime: {
+  type: String,
+},
 
   customerName: {
     type: String,
-    required: true,
   },
 
   customerAddress: {
     type: String,
-    required: true,
   },
 
   customerPostalCode: {
     type: String,
-    required: true,
   },
 
 customerCity: {
     type: String,
-    required: true,
   },
 
   customerPhone: {
     type: String,
-    required: true,
   },
 
   cleanerOrderId: {
-    type: Number,
-    ref: "Cleaner",
+    type: String,
   },
 
   cleanerPrize: {
@@ -49,8 +48,7 @@ customerCity: {
   },
 
   menuId: {
-    type: Number,
-    ref: "Menu",
+    type: String,
   },
 
   menuPrizeTotal: {

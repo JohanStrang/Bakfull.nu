@@ -6,12 +6,16 @@ import { LineThrough } from "../../components/Icons/LineThrough";
 import { Lines } from "../../components/Icons/Lines";
 import { Navbar } from "../../components/Navbar/Navbar";
 
+import { Geolocation } from '../../components/Geolocation/geolocation';
+
+
 import "./Home.scss";
 
 export const Home = () => {
   return (
     <>
       <Navbar></Navbar>
+      <Geolocation></Geolocation> 
       <main className="main-container">
         <div className="hero-wrapper">
           <img

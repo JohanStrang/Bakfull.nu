@@ -26,4 +26,17 @@ exports.menu = [
     menuPrize: '300',
   },
 
+  {
+    restaurantName: 'Minna Sallad',
+    restaurantAddress: 'Salladsvägen 2',
+    restaurantPostalCode: '222 22',
+    restaurantCity: 'SolSundbybergna',
+    restaurantPhone: '073 123456',
+    restaurantURL: 'www.jannes.se',
+    restaurantContact: 'Minna Jansson',
+    menuDescription: 'Sallad',
+    menuPrize: '350',
+  },
+
+
 ];

@@ -58,7 +58,7 @@ exports.updateCleanerById = async (req, res) => {
     const newCleanerDescription = req.body.cleanerDescription;
     const newCleanerPrize = req.body.cleanerPrize;
 
-    const cleaner = await Cleaner.findById(bookingId);
+    const cleaner = await Cleaner.findById(cleanerId);
     if (!cleaner)
       throw new NotFoundError("Could not find cleaner information");
 
@@ -95,26 +95,29 @@ exports.createNewCleaner = async (req, res) => {
     cleanerContact,
     cleanerDescription,
     cleanerPrize,
+    cleanerUserName,
+    cleanerPassword,
   } = req.body;
 
   try {
     if (!cleanerName || !cleanerAddress || !cleanerPostalCode || !cleanerCity || !cleanerPhone || 
-      !cleanerURL || !cleanerContact || !cleanerDescription || !cleanerPrize) {
-      return res.status(400).json({ error: "Missing required fields" });
+     !cleanerURL || !cleanerContact || !cleanerDescription || !cleanerPrize || !cleanerUserName || !cleanerPassword) {
+    return res.status(400).json({ error: "Missing required fields" });
     };
 
 
     const newCleaner = await Cleaner.create({
-      cleanerId: newCleaner._id,
       cleanerName: cleanerName,
       cleanerAddress: cleanerAddress,
       cleanerPostalCode: cleanerPostalCode,
       cleanerCity: cleanerCity,
-      cleanerPhone: customerPhone,
+      cleanerPhone: cleanerPhone,
       cleanerURL: cleanerURL,
       cleanerContact: cleanerContact,
       cleanerDescription: cleanerDescription,
       cleanerPrize: cleanerPrize,
+      cleanerUserName: cleanerUserName,
+      cleanerPassword: cleanerPassword,
     });
 
     console.log("Creating new cleaner");
@@ -133,9 +136,10 @@ exports.deleteCleanerById = async (req, res) => {
   try {
     const cleanerId = req.params.cleanerId;
     const cleanerToDelete = await Cleaner.findById(cleanerId);
+    console.log(cleanerToDelete);
     if (!cleanerToDelete) throw new Error("Cleaner not found");
 
-    await orderToDelete.deleteOne();
+    await cleanerToDelete.deleteOne();
     return res.status(200).json({ message: "Cleaner deleted successfully" });
   } catch (error) {
     console.error(error);

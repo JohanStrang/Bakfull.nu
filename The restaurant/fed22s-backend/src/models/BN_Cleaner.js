@@ -56,8 +56,16 @@ const cleanerSchema = new Schema(
 
   cleanerPrize: {
     type: Number,
-    required: true,
   },
+
+  cleanerUserName: {
+    type: String,
+  },
+
+  cleanerPassword: {
+    type: String,
+  },
+
 
   },
   {

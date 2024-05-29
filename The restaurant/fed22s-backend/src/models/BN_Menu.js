@@ -53,6 +53,14 @@ restaurantCity: {
     required: true,
   },
 
+  restaurantUserName: {
+    type: String,
+  },
+
+  restaurantPassword: {
+    type: String,
+  },
+
   },
   {
     timestamps: true,
