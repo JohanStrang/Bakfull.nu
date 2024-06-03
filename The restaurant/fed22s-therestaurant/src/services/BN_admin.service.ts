@@ -31,6 +31,16 @@ export class BN_AdminService {
     return response.data;
   }
 
+  //RN
+public async getCleanerById(id: string): Promise<any> {  
+  console.log(id);
+  const response = await axios.get(
+    "http://localhost:3000/api/v1/cleaners/" + id
+  );
+  return response.data;
+}
+
+
 //RN
 public async deleteCleaner(id: string): Promise<any> {  
   console.log(id);
@@ -75,6 +85,15 @@ return response.data;
 }
 
 //RN
+public async getMenuById(id: string): Promise<any> {  
+  console.log(id);
+  const response = await axios.get(
+    "http://localhost:3000/api/v1/menues/" + id
+  );
+  return response.data;
+  }
+
+//RN
 public async addMenues (menu: any): Promise<any> {
 console.log(menu.restaurantName);
 const response = await axios.post("http://localhost:3000/api/v1/menues", {
@@ -99,6 +118,31 @@ public async getAllOrders(): Promise<IOrders[]> {
   return response.data;
 }
 
+//RN Search Order on Customer Phone
+public async getOrdersByCustomerPhone(customerPhone: string): Promise<IOrders[]> {
+  console.log(customerPhone)
+  const response = await axios.get<IOrders[]>("http://localhost:3000/api/v1/orders/phone/" + customerPhone);
+  console.log(response)
+  return response.data;
+}
+
+//RN Search order on Cleaner Id
+public async getOrdersByCleanerId(cleanerId: string): Promise<IOrders[]> {
+  console.log(cleanerId)
+  const response = await axios.get<IOrders[]>("http://localhost:3000/api/v1/orders/cleaner/" + cleanerId);
+  console.log(response)
+  return response.data;
+}
+
+//RN Search order on Menu Id (Restaurant)
+public async getOrdersByMenuId(menuId: string): Promise<IOrders[]> {
+  console.log(menuId)
+  const response = await axios.get<IOrders[]>("http://localhost:3000/api/v1/orders/restaurant/" + menuId);
+  console.log(response)
+  return response.data;
+}
+
+
 //RN
 public async deleteOrders(id: string): Promise<any> {  
 console.log(id);
@@ -110,7 +154,8 @@ return response.data;
 
 //RN
 public async addOrders (order: any): Promise<any> {
-console.log(order.customertName);
+console.log(order.cleanerId);
+console.log(order.menuId);
 const response = await axios.post("http://localhost:3000/api/v1/orders", {
   OrderDate: order.OrderDate,
   OrderTime: order.OrderTime,
@@ -119,7 +164,7 @@ const response = await axios.post("http://localhost:3000/api/v1/orders", {
   customerPostalCode: order.customerPostalCode,
   customerCity: order.customerCity,
   customerPhone: order.customerPhone,
-  cleanerOrderId: order.cleanerOrderId,
+  cleanerId: order.cleanerId,
   cleanerPrize: order.cleanerPrize,
   menuId: order.menuId,
   menuPrizeTotal: order.menuPrizeTotal,
@@ -134,7 +179,33 @@ const response = await axios.post("http://localhost:3000/api/v1/orders", {
 return response.data;
 }
 
-//Bara för test
+//RN
+public async updateOrders (order: any): Promise<any> {
+  const response = await axios.put("http://localhost:3000/api/v1/orders/" + order._id, {
+    OrderDate: order.OrderDate,
+    OrderTime: order.OrderTime,
+    customerName: order.customerName,
+    customerAddress: order.customerAddress,
+    customerPostalCode: order.customerPostalCode,
+    customerCity: order.customerCity,
+    customerPhone: order.customerPhone,
+    cleanerId: order.cleanerId,
+    cleanerPrize: order.cleanerPrize,
+    menuId: order.menuId,
+    menuPrizeTotal: order.menuPrizeTotal,
+    orderPrizeTotal: order.orderPrizeTotal,
+    cleaningDone: order.cleaningDone,
+    cleaningReview: order.cleaningReview,
+    cleaningReviewComment: order.cleaningReviewComment,
+    menuDelivered: order.menuDelivered,
+    menuReview: order.menuReview,
+    menuReviewComment: order.menuReviewComment,
+  });
+  return response.data;
+  }
+  
+
+//Update Cleaners
 public async updateCleaners(cleaner: ICleaners): Promise<any> {
   const response = await axios.put(
     "http://localhost:3000/api/v1/cleaners/" + cleaner._id,
@@ -154,66 +225,14 @@ public async updateCleaners(cleaner: ICleaners): Promise<any> {
   );
   return response.data;
 };
-}
 
-//OLD RESTAURANT *****************
-
- /* public async addBooking(booking: any): Promise<any> {
-    console.log(booking.guestEmail);
-    const response = await axios.post("http://localhost:3000/api/v1/bookings", {
-      guestName: booking.guestName,
-      guestEmail: booking.guestEmail,
-      guestPhoneNum: booking.guestPhoneNum,
-      reservationDate: booking.reservationDate,
-      reservationTime: booking.reservationTime,
-      statusForTable: booking.statusForTable,
-      partySize: booking.partySize,
-      tableNumber: booking.tableNumber,
-    });
-    return response.data;
+//RN
+public async fetchGeoAddress(lat: any, lon: any): Promise<any> {  
+  console.log(lat);
+  const response = await axios.get(
+    "https://api.geoapify.com/v1/geocode/reverse?lat=" + lat + "lon="+ lon + "&apiKey=de98ec1028cf45669eab9bee4772ad5f" 
+  );
+  return response.data;
   }
-
-  public async deleteBooking(id: string): Promise<any> {
-    console.log(id);
-    const response = await axios.delete(
-      "http://localhost:3000/api/v1/bookings/" + id
-    );
-    return response.data;
-  }
-
-  public async deleteGuest(id: string): Promise<any> {
-    console.log(id);
-    const response = await axios.delete(
-      "http://localhost:3000/api/v1/guests/" + id
-    );
-    return response.data;
-  }
-
-  public async getGuestById(id: string): Promise<any> {
-    console.log(id);
-    const response = await axios.get(
-      "http://localhost:3000/api/v1/guests/" + id
-    );
-    return response.data.guestName;
-  }
-
-  public async getAllGuests(): Promise<IAllGuests[]> {
-    const response = await axios.get("http://localhost:3000/api/v1/guests/");
-    return response.data;
-  }
-
-  //Bara för test
-  public async updateBooking(booking: IUpdateBooking): Promise<any> {
-    const response = await axios.put(
-      "http://localhost:3000/api/v1/bookings/" + booking._id,
-      {
-        reservationDate: booking.reservationDate,
-        reservationTime: booking.reservationTime,
-        partySize: booking.partySize,
-        tableNumber: booking.tableNumber,
-      }
-    );
-    return response.data;
-  }
-}
-*/
+  
+};

@@ -46,10 +46,28 @@ exports.getOrderById = async (req, res) => {
   }
 };
 
+exports.getOrderByCustomerPhone = async (req, res) => {
+  try {
+    //const { customerPhone } = req.query;
+    //const order = await Order.find({ customerPhone });
+    //const order = await Order.find({ customerPhone }.populate("menu").populate("cleaner"));
+    //const order = await Order.findById(customerPhone).populate("menu").populate("cleaner");
+    const customerPhone = req.query.customerPhone;
+    const order = await Order.find(customerPhone);
+    if (!order) throw new NotFoundError("That order does not exist");
+    return res.status(200).json(order);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 exports.getOrderByCleaner = async (req, res) => {
   try {
-    const cleanerId = req.params.cleanerId;
-    const order = await Order.findById(cleanerId).populate("menu").populate("cleaner");
+    const cleanerId = req.body.cleanerId;
+    const order = await Order.find(cleanerId);
     if (!order) throw new NotFoundError("That order does not exist");
     return res.status(200).json(order);
   } catch (error) {
@@ -62,8 +80,8 @@ exports.getOrderByCleaner = async (req, res) => {
 
 exports.getOrderByMenu = async (req, res) => {
   try {
-    const menuId = req.params.menuId;
-    const order = await Menu.findById(menuId).populate("menu").populate("cleaner");
+    const menuId = req.body.menuId;
+    const order = await Order.find(menuId);
     if (!order) throw new NotFoundError("That order does not exist");
     return res.status(200).json(order);
   } catch (error) {
@@ -83,7 +101,7 @@ exports.createNewOrder = async (req, res) => {
       customerPostalCode,
       customerCity,
       customerPhone,
-      cleanerOrderId,
+      cleanerId,
       cleanerPrize,
       menuId,
       menuPrizeTotal,
@@ -110,7 +128,7 @@ exports.createNewOrder = async (req, res) => {
       customerPostalCode: customerPostalCode,
       customerCity: customerCity,
       customerPhone: customerPhone,
-      cleanerOrderId: cleanerOrderId,
+      cleanerId: cleanerId,
       cleanerPrize: cleanerPrize,
       menuId: menuId,
       menuPrizeTotal: menuPrizeTotal,
@@ -127,6 +145,64 @@ exports.createNewOrder = async (req, res) => {
 
     const savedOrder = await newOrder.save();
     return res.status(201).json(savedOrder);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+
+exports.updateOrderById = async (req, res) => {
+  try {
+    
+    const orderId = req.params.orderId;
+    const newOrderDate = req.body.OrderDate;
+    const newOrderTime = req.body.OrderTime;
+    const newcustomerName = req.body.customerName;
+    const newcustomerAddress = req.body.customerAddress;
+    const newcustomerPostalCode = req.body.customerPostalCode;
+    const newcustomerCity = req.body.customerCity;
+    const newcustomerPhone = req.body.customerPhone;
+    const newcleanerId = req.body.cleanerId;
+    const newCleanerPrize = req.body.cleanerPrize;
+    const newmenuId = req.body.menuId;
+    const newmenuPrizeTotal = req.body.menuPrizeTotal;
+    const neworderPrizeTotal = req.body.orderPrizeTotal;
+    const newcleaningDone = req.body.cleaningDone;
+    const newcleaningReview = req.body.cleaningReview;
+    const newcleaningReviewComment = req.body.cleaningReviewComment;
+    const newmenuDelivered= req.body.menuDelivered;
+    const newmenuReview = req.body.menuReview;
+    const newmenuReviewComment = req.body.menuReviewComment;
+
+    const order = await Order.findById(orderId);
+    if (!order)
+      throw new NotFoundError("Could not find order information");
+
+    if (newOrderDate) order.OrderDate = newOrderDate;
+    if (newOrderTime) order.OrderTime = newOrderTime;
+    if (newcustomerName) order.customerName = newcustomerName;
+    if (newcustomerAddress) order.customerAddress = newcustomerAddress;
+    if (newcustomerPostalCode) order.customerPostalCode = newcustomerPostalCode;
+    if (newcustomerCity) order.customerCity = newcustomerCity;
+    if (newcustomerPhone) order.customerPhone = newcustomerPhone;
+    if (newcleanerId) order.cleanerId = newcleanerId;
+    if (newCleanerPrize) order.cleanerPrize = newCleanerPrize;
+    if (newmenuId) order.menuId = newmenuId;
+    if (newmenuPrizeTotal) order.menuPrizeTotal = newmenuPrizeTotal;
+    if (neworderPrizeTotal) order.orderPrizeTotal = neworderPrizeTotal;
+    if (newcleaningDone) order.cleaningDone = newcleaningDone;
+    if (newcleaningReview) order.cleaningReview = newcleaningReview;
+    if (newcleaningReviewComment) order.cleaningReviewComment = newcleaningReviewComment;
+    if (newmenuDelivered) order.menuDelivered = newmenuDelivered;
+    if (newmenuReview) order.menuReview = newmenuReview;
+    if (newmenuReviewComment) order.menuReviewComment = newmenuReviewComment;
+
+    const updatedOrder = await order.save();
+
+    return res.status(200).json(updatedOrder);
   } catch (error) {
     console.error(error);
     return res.status(500).json({

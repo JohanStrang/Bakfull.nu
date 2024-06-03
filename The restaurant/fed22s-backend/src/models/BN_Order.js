@@ -39,7 +39,7 @@ customerCity: {
     type: String,
   },
 
-  cleanerOrderId: {
+  cleanerId: {
     type: String,
   },
 

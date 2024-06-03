@@ -1,5 +1,6 @@
 import React from "react";
 import { useGeolocated } from "react-geolocated";
+import { BN_AdminService } from "../../services/BN_admin.service";
 
 export const Geolocation = () => {
     const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -9,6 +10,12 @@ export const Geolocation = () => {
             },
             userDecisionTimeout: 5000,
         });
+
+const bn_AdminService = new BN_AdminService ();
+
+const FetchAdress = (lat: number, lon : number) => {
+    bn_AdminService.fetchGeoAddress( lat, lon)
+                };
 
     return !isGeolocationAvailable ? (
         <div>Your browser does not support Geolocation</div>
@@ -37,10 +44,13 @@ export const Geolocation = () => {
                     <td>speed</td>
                     <td>{coords.speed}</td>
                 </tr>
+                
             </tbody>
         </table>
+        
     ) : (
         <div>Getting the location data&hellip; </div>
+        
     );
 };
 

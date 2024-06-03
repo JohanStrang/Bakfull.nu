@@ -15,6 +15,7 @@ import { BN_Main } from './pages/Bakfull.nu Main/BN_Main';
 import BN_AdminCleaner from './pages/BN_Admin/BN_AdminCleaner';
 import BN_AdminMenues from './pages/BN_Admin/BN_AdminMenues';
 import BN_AdminOrder from './pages/BN_Admin/BN_AdminOrder';
+import BN_Cleaner from './pages/BN_Admin/BN_Cleaner';
 
 import BN_Main_Mobile from './pages/Bakfull.nu Main/BN_Main_Mobile';
 
@@ -68,6 +69,11 @@ export const router = createBrowserRouter([
   {
     path: '/BN_AdminOrder',
     element: <BN_AdminOrder></BN_AdminOrder>,
+  },
+
+  {
+    path: '/BN_Cleaner',
+    element: <BN_Cleaner></BN_Cleaner>,
   },
 
 ]);

@@ -20,16 +20,16 @@
 
 
   .wrapper{
-  width: 90%;
+  width: 100%;
   padding:0.35em 1.2em;
-  border:0.1em solid #b9b9b8;
-  margin: 10px 0.3em 0.3em 0;
+  border:0.1em solid black;
+  margin: auto;
   border-radius:0.12em;
   box-sizing: border-box;
   }
   .searchInput {
   background-repeat: no-repeat;
-  width: 95%;
+  width: 90%;
   font-size: 16px;
   padding: 12px 20px 12px 12px;
   border: 1px solid #ddd;
@@ -66,7 +66,35 @@
   background-color: #b9b9b8;
   }
 
-  
+  table, thead, tbody{
+    border: 0.2px solid;
+    border-color: whitesmoke;
+  }
+
+  table {
+    width: 100%;
+    }
+
+    th, td {
+      text-align: center;
+      width: 10%;
+      }
+
+      @media (max-width: 768px) {
+        table {
+          width: 350px;
+        }
+       th, td {
+          max-width: 75px;
+          font-size: 0.7rem;
+        }
+        .itemButton {
+          font-size: 0.7rem;
+        }
+        
+      }
+
+
   .bookinItems {
   list-style-type: none;
   padding: 2px;
@@ -118,7 +146,7 @@
   background: #242526;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
   width: 80%;
-  height: 58%;
+  height: 68%;
   padding: 1rem;
   border-radius: 1rem;
   }

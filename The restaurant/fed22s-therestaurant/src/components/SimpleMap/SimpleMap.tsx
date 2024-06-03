@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -28,4 +28,4 @@ export default function SimpleMap(){
       </GoogleMapReact>
     </div>
   );
-}
+}*/

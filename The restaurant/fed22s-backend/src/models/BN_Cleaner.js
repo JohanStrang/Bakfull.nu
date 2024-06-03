@@ -6,7 +6,7 @@ const cleanerSchema = new Schema(
     
   {  
     
-    cleanerOrderId: {
+    cleanerId: {
       type: mongoose.Schema.Types.ObjectId,
     },
 

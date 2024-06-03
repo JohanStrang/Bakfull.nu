@@ -9,7 +9,7 @@ export interface IOrders {
   customerPostalCode: string;
   customerCity: string;
   customerPhone: string;
-  cleanerOrderId: string;
+  cleanerId: string;
   cleanerPrize: number;
   menuId: string;
   menuPrizeTotal: number;
@@ -31,7 +31,7 @@ export interface INewOrders {
   customerPostalCode: string;
   customerCity: string;
   customerPhone: string;
-  cleanerOrderId: string;
+  cleanerId: string;
   cleanerPrize: number;
   menuId: string;
   menuPrizeTotal: number;

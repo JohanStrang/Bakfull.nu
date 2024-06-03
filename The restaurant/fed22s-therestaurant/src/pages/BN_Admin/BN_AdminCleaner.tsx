@@ -36,7 +36,7 @@ const startCleaner:ICleaners = {
     "cleanerURL": "",
     "cleanerContact": "",
     "cleanerDescription": "",
-    "cleanerPrize": 100,
+    "cleanerPrize": 0,
     "cleanerUserName": "",
     "cleanerPassword": "",
     }
@@ -47,21 +47,14 @@ const [showError, setShowError] = useState(false);
 
 
 const [updateCleaner, setUpdateCleaner] = useState("")
-
-//BN
 const [cleaners, setCleaners] = useState<ICleaners[]>([]);
-//const [cleaners, setCleaners] = useState([]);
-
 const [inputs, setInputs] = useState<ICleaners> (startCleaner);
 
-
-//RN
 const bn_AdminService = new BN_AdminService ();
-
 
 const { isOpen, toggle } = useModal();
 
-//RN
+//Get All Cleaners
 const getAllCleaners = async () => {
     const cleaner = await bn_AdminService.getAllCleaners();
     setCleaners(cleaner);
@@ -69,7 +62,7 @@ const getAllCleaners = async () => {
     };
 
 
-
+//Handle Values in Edit
 const openModalBooking = async (inputs:ICleaners) => {
     setInputs(values => ({...values,"_id": inputs._id}));
     setInputs(values => ({...values,"cleanerName": inputs.cleanerName}));
@@ -84,16 +77,21 @@ const openModalBooking = async (inputs:ICleaners) => {
     setInputs(values => ({...values,"cleanerUserName": inputs.cleanerUserName}));
     setInputs(values => ({...values,"cleanerPassword": inputs.cleanerPassword}));
 toggle()
-console.log(inputs)
-//editBooking(inputs)
+//console.log(inputs)
 };
 
 
 const editCleaner = async (inputs:ICleaners) => {
 const response = await bn_AdminService.updateCleaners(inputs);
 setUpdateCleaner(response);
-console.log(response);
+getAllCleaners();
+toggle()
 };
+
+const deleteCleanerLocal = async (cleanerId:string) => {
+    const response = bn_AdminService.deleteCleaner((cleanerId));
+    getAllCleaners()
+    };
 
 
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -111,27 +109,45 @@ console.log(inputs)
 }
 
 
-//RN All Cleaners
-const cleanerItems = cleaners.map((cleaners) => (
+//List All Cleaners in Table
+const cleanerItemsTable = cleaners.map((cleaners) => (
     <div className = "bookinItems" key={(cleaners._id.toString())} >
     <li className = "listItem">
-    <p className = "item">
-    <b> Name: </b>&nbsp;{cleaners.cleanerName} &nbsp;
-    <b> Phone: </b>&nbsp;{cleaners.cleanerPhone} &nbsp;
-    <b> Contact: </b> &nbsp; {cleaners.cleanerContact} &nbsp;
-    <b> User Name: </b> &nbsp; {cleaners.cleanerUserName} &nbsp;
-    <b> Password: </b> &nbsp; {cleaners.cleanerPassword} &nbsp;
-    <b> Prize: </b> &nbsp; {cleaners.cleanerPrize} &nbsp;
-    
-    
+    <table>
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Adress</th>
+        <th>Contact</th>
+        <th>Phone</th>
+        <th>Service</th>
+        <th>Prize</th>
+        <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>{cleaners.cleanerName}</td>
+        <td>{cleaners.cleanerAddress} &nbsp; {cleaners.cleanerCity} </td>
+        <td>{cleaners.cleanerContact}</td>
+        <td>{cleaners.cleanerPhone} </td>
+        <td>{cleaners.cleanerDescription}</td>
+        <td>{cleaners.cleanerPrize} </td>
+        <td>
+         <span className = "itemButtonGroup">
+            <button className = "itemButton" onClick={() => deleteCleanerLocal((cleaners._id).toString())}>Delete</button>
+            <button className = "itemButton" onClick={() => openModalBooking(cleaners)}>Update</button>
+        </span>
+    </td>
+    </tr>
+  </tbody>
+</table>
 
-    <span className = "itemButtonGroup">
-        <button className = "itemButton" onClick={() => bn_AdminService.deleteCleaner((cleaners._id).toString())}>Delete</button>
-        <button className = "itemButton" onClick={() => openModalBooking(cleaners)}>Update</button>
-    </span>
-    </p>
+
     </li>
     </div>));
+
+
 
 return (
 <>
@@ -144,24 +160,18 @@ return (
 
 
 <form className="formModal" onSubmit ={handleSubmit}>
-<h2>Admin | update cleaner</h2>
 
-<button className = "searchButton" onClick={() => editCleaner((inputs))}>Update</button>
 
 <div className="row">
 <div className="column">
 
-<h3>Cleaner</h3>
-
-<label> ID temp:&nbsp;
 <input
 className="input"
-type ="text"
+type ="hidden"
 value = {inputs._id}
 name="_id"
 required
 onChange = {handleChange}/>
-</label>
 
 
 <label> Cleaner name:&nbsp;
@@ -185,16 +195,13 @@ required
 onChange = {handleChange}/>
 </label>
 
-
-<label> Postal Code:&nbsp;
 <input
 className="input"
-type ="text"
+type ="hidden"
 value = {inputs.cleanerPostalCode}
 name="cleanerPostalCode"
 required
 onChange = {handleChange}/>
-</label>
 
 
 <label> City:&nbsp;
@@ -217,15 +224,13 @@ required
 onChange = {handleChange}/>
 </label>
 
-<label> Web address:&nbsp;
 <input
 className="input"
-type ="text"
+type ="hidden"
 value = {inputs.cleanerURL}
 name="cleanerURL"
 required
 onChange = {handleChange}/>
-</label>
 
 <label> Contact person:&nbsp;
 <input
@@ -237,12 +242,8 @@ required
 onChange = {handleChange}/>
 </label>
 
-<div/>
-
+</div>
 <div className="column">
-
-<br></br>
-<h3>User Admin</h3>
 
 <label> User Name:&nbsp;
 <input
@@ -264,11 +265,7 @@ required
 onChange = {handleChange}/>
 </label>
 
-<br></br>
-<br></br>
-<h3>Cleaner item</h3>
-
-<label> Cleaner Decription:&nbsp;
+<label> Service Decription:&nbsp;
 <input
 className="input"
 type ="text"
@@ -287,25 +284,29 @@ name="cleanerPrize"
 required
 onChange = {handleChange}/>
 </label>
+
+<br></br>
+<br></br>
+<button className = "searchButton" onClick={() => editCleaner((inputs))}>Update</button>
+
 </div>
 </div>
 
-
-
-
-</div>
 </form>
-<div/>
+
 </Modal>
 
 
 <div className="wrapper">
 <h2>List Cleaners</h2>
 
+
+
 <button className = "searchButton" onClick={getAllCleaners}>List</button>
 <br></br>
 <br></br>
-{cleanerItems}
+
+{cleanerItemsTable}
 <br></br>
 
 </div>

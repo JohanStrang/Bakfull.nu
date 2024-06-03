@@ -10,6 +10,10 @@ import { BN_AdminService } from "../../services/BN_admin.service";
 import { IOrders, INewOrders} from "../../models/RN_Orders";
 
 
+//BN
+import { ICleaners, INewCleaners} from "../../models/RN_Cleaners";
+import { IMenues } from '../../models/RN_Menues';
+
 //RN
 const startOrder:INewOrders = {
 "OrderDate": "",
@@ -19,7 +23,7 @@ const startOrder:INewOrders = {
 "customerPostalCode": "",
 "customerCity": "",
 "customerPhone": "",
-"cleanerOrderId": "",
+"cleanerId": "",
 "cleanerPrize": 0,
 "menuId": "",
 "menuPrizeTotal": 0,
@@ -56,11 +60,71 @@ const bn_AdminService = new BN_AdminService ();
 
 
 const addOrder = async () => {
+console.log(inputs)
 const response = await bn_AdminService.addOrders(inputs);
 };
 
 const [inputs, setInputs] = useState<INewOrders> (startOrder);
 
+//**************
+
+//Cleaner dropdown list
+const [selectedDropDownCleanerValue, setSelectedDropDownCleanerValue] = useState(''); 
+
+const [cleaners, setCleaners] = useState<ICleaners[]>([]);
+const [cleanerDescription, setCleanerDescription] = useState("")
+const [restaurantName, setRestaurantName] = useState("")
+
+const getAllCleaners = async () => {
+    const cleaner = await bn_AdminService.getAllCleaners();
+    setCleaners(cleaner);
+    console.log(cleaner);
+    };
+
+const createNewOrder = async () => {
+    getAllCleaners();
+    getAllMenues();
+    toggle();
+};
+
+const getCleanerById = async (tempCleanerId: string) => {
+    const tempSearch = await bn_AdminService.getCleanerById(tempCleanerId);
+    console.log(tempSearch.cleanerPrize)
+    setInputs(values => ({...values, "cleanerPrize": tempSearch.cleanerPrize}))
+    const tempOrderPrizeTotal = tempSearch.cleanerPrize + inputs.menuPrizeTotal
+    setInputs(values => ({...values, "orderPrizeTotal": tempOrderPrizeTotal}))
+    setCleanerDescription(tempSearch.cleanerDescription)
+    };
+
+const getMenuById = async (tempMenuId: string) => {
+        const tempSearch = await bn_AdminService.getMenuById(tempMenuId);
+        console.log(tempSearch.menuPrizeTotal)
+        setInputs(values => ({...values, "menuPrizeTotal": tempSearch.menuPrize}))
+        console.log(inputs.cleanerPrize)
+        const tempOrderPrizeTotal = inputs.cleanerPrize + tempSearch.menuPrize
+        setInputs(values => ({...values, "orderPrizeTotal": tempOrderPrizeTotal}))
+        setRestaurantName(tempSearch.restaurantName)
+        };
+
+const [isOpen, setIsOpen] = useState(false);
+      
+function toggle() {
+          setIsOpen((isOpen) => !isOpen);
+        };
+ 
+  //Cleaner dropdown list
+const [selectedDropDownMenuValue, setSelectedDropDownMenuValue] = useState(''); 
+
+const [menues, setMenues] = useState<IMenues[]>([]);
+
+const getAllMenues = async () => {
+    const menu = await bn_AdminService.getAllMenues();
+    setMenues(menu);
+    console.log(menu);
+    };
+
+     
+//************
 
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 const name = e.target.name;
@@ -68,6 +132,19 @@ const value = e.target.value;
 setInputs(values => ({...values, [name]: value}))
 }
 
+const handleChangeSelectMenu = (e: ChangeEvent<HTMLSelectElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs(values => ({...values, [name]: value}))
+    getMenuById(e.target.value)
+    }
+
+const handleChangeSelectCleaner = (e: ChangeEvent<HTMLSelectElement>) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setInputs(values => ({...values, [name]: value}))
+        getCleanerById(e.target.value)
+        }
 
 const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
 e.preventDefault();
@@ -82,7 +159,7 @@ addOrder()
     setInputs(values => ({...values,"customerPostalCode": ""}));
     setInputs(values => ({...values,"customerCity": ""}));
     setInputs(values => ({...values,"customerPhone": ""}));
-    setInputs(values => ({...values,"cleanerOrderId": ""}));
+    setInputs(values => ({...values,"cleanerId": ""}));
     setInputs(values => ({...values,"cleanerPrize": 0}));
     setInputs(values => ({...values,"menuId": ""}));
     setInputs(values => ({...values,"menuPrizeTotal": 0}));
@@ -100,9 +177,16 @@ return (
 <>
 <div className="wrapper">
 
-<form onSubmit ={handleSubmit}>  
 <h2>Add New Order</h2>
-  
+<br></br>
+<br></br>
+<button className = "searchButton" onClick={createNewOrder}>Create New Order</button>
+<br></br>
+<br></br>
+
+{isOpen && <form className="form" onSubmit ={handleSubmit}>  
+
+
 <div className="row">
 <div className="column">
 
@@ -287,26 +371,57 @@ onChange = {handleChange}/>
 <br></br>   
 <br></br>
 <br></br>
-<h3>Refernce data (internal)</h3>
+<h3>Cleaner & Menu</h3>
 
-<label> Order ID *:&nbsp;
-<input
-className="input"
-type ="text"
-value = {inputs.cleanerOrderId}
-name="cleanerOrderId"
-required
-onChange = {handleChange}/>
+
+<label> Cleaner Dropdown *:&nbsp;
+<select 
+      className="dropdown"
+      value={inputs.cleanerId} 
+      name="cleanerId"
+      onChange={handleChangeSelectCleaner}
+    > 
+      {cleaners.map(cleaner => ( 
+        <option key={cleaner._id} value={cleaner._id}> 
+          {cleaner.cleanerName} 
+        </option> 
+      ))} 
+</select> 
 </label>
 
-<label> Menu ID *:&nbsp;
+<label> Cleaner Description:&nbsp;
 <input
 className="input"
 type ="text"
-value = {inputs.menuId}
-name="menuId"
-required
-onChange = {handleChange}/>
+value = {cleanerDescription}
+readOnly = {true}
+name="cleanerDescription"
+/>
+</label>
+
+<label> Menu Dropdown *:&nbsp;
+<select 
+      className="dropdown"
+      value={inputs.menuId}
+      name="menuId"
+      onChange={handleChangeSelectMenu}
+    > 
+      {menues.map(menu => ( 
+        <option key={menu._id} value={menu._id}> 
+          {menu.menuDescription} 
+        </option> 
+      ))} 
+</select> 
+
+</label>
+<label> Restaurant name:&nbsp;
+<input
+className="input"
+type ="text"
+value = {restaurantName}
+readOnly = {true}
+name="restaurantName"
+/>
 </label>
 </div>
 </div>
@@ -317,7 +432,7 @@ type="submit">Save</button>
 <br></br>
 <br></br>
 
-</form>
+</form>}
 </div>
 </>
 );
