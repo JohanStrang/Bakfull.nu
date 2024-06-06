@@ -1,0 +1,230 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    background-color: white;
+  }
+
+  label {
+    background-color: white;
+    color: black;
+  }
+
+  h1, h2 {
+    background-color: white;
+  }
+
+
+.wrapper{
+    width: 95%;
+    background-color: white;
+    }
+    .fields {
+    text-align: left;
+    border: 0;
+    }
+    .radio {
+    font-size: 12px;
+    }
+    
+    .form {
+        width: 90%;
+        background-color: white;
+      }
+
+    .input {
+        color: black;
+      }
+
+   
+    select {
+        appearance: none;
+        outline: 0;
+        background: white;   
+        background-image: none;
+        width: 100%;
+        height: 100%;
+        color: white;
+        cursor: pointer;
+        border: 1px solid white;
+        border-radius: 3px;
+        border-color: black;
+    }
+
+    .dropdown {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 2.7em;
+        line-height: 3;
+        overflow: hidden;
+        border-radius: .25em;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        background-color: white;
+        border-color: black;
+        color: black;
+    }
+
+    .dropdown:hover{
+      color: black;
+      background-color: #b9b9b8;
+      }
+
+ .input{
+    cursor: pointer;
+    width: 100%;
+    background-color: white;
+    border-color: black;
+    }
+    
+.form {
+    width: 100%;
+    }
+
+    .input:hover{
+    color: black;
+    background-color: #b9b9b8;
+    }
+
+    .bookAdminButton{
+    display:inline-block;
+    padding:0.35em;
+    border:0.3em solid black;
+    margin:35px;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:bold;
+    font-size: 16px;
+    color: black;
+    text-align:center;
+    transition: all 0.2s;
+    padding: 12px;
+    margin-left: 12px;
+    width: 145px;
+    background-color: #727272 ;
+    border-color: black;
+    }
+    .bookAdminButton:hover{
+    color: black;
+    background-color: #b9b9b8;
+    }
+
+    form {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-weight: 100;
+    
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgb(79, 98, 148);
+    }
+    
+    .form {
+      background: white;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    input {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid black;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    
+    label {
+      line-height: 2;
+      text-align: left;
+      display: block;
+      margin-bottom: 13px;
+      margin-top: 20px;
+      color: whitesmoke;
+      font-size: 14px;
+      font-weight: 200;
+    }
+    
+    button[type="submit"],
+    input[type="submit"] {
+      color: white;
+      border: none;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 16px;
+      font-weight: 100;
+      letter-spacing: 10px;
+    }
+    
+    button[type="submit"]:hover,
+    input[type="submit"]:hover {
+      background: #555;
+    }
+    
+    button[type="submit"]:active,
+    input[type="button"]:active,
+    input[type="submit"]:active {
+      transition: 0.3s all;
+      transform: translateY(3px);
+      border: 1px solid transparent;
+      opacity: 0.8;
+    }
+    
+    input:disabled {
+      opacity: 0.4;
+    }
+    
+    input[type="button"]:hover {
+      transition: 0.3s all;
+    }
+    
+    button[type="button"] {
+      display: block;
+      appearance: none;
+      background: #333;
+      color: white;
+      border: none;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 4px;
+    }
+    pre {
+      color: white;
+    }
+    
+    hr {
+      margin-top: 30px;
+    }
+    
+    .gdpr-label {
+      display: flex;
+      align-items: center;
+    }
+    
+    .gdpr-text {
+      margin-left: 8px;
+      white-space: nowrap;
+    }
+    
+    

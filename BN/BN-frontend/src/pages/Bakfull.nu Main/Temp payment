@@ -1,0 +1,116 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/d83948a257.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/src/scss/main.scss" />
+    <script src="/src/ts/paymentsite.ts" type="module" defer></script>
+    <script src="/src/ts/modal.ts" type="module" defer></script>
+
+    <title>Godisbutiken</title>
+  </head>
+  <body>
+    <div class="bg">
+      <header>
+        <nav>
+          <!-- Hamburgermeny -->
+          <div class="top-nav">
+            <input id="menu-toggle" type="checkbox" />
+            <label class="menu-button-container" for="menu-toggle">
+              <div class="menu-button"></div>
+            </label>
+            <img src="/src/assets/klubbor.png" class="logo" alt="lollipops" />
+            <a id="myBtn"><i class="fa-solid fa-cart-shopping"></i
+              ></a>
+
+            <ul class="menu">
+              <li><a href="../index.html">Hem</a></li>
+              <li><a href="products.html">Produkter</a></li>
+              <li><a href="#contact">Kontakt</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <main>
+      <h2 class="paymentHeading">Kortuppgifter</h2>
+      <form>
+        <div class="payment">
+
+          <div class="contactInfo">
+            <label for="firstname">Förnamn: </label>
+            <input type="text" id="firstname" placeholder="Ange förnamn">
+            
+            <label for="lastname">Efternamn: </label>
+            <input type="text" id="lastname" />
+
+            <label for="email">E-mail: </label>
+            <input type="email" id="email" />
+
+            <label for="adress">Adress: </label>
+            <input type="text" id="adress" />
+
+            <label for="city">Stad: </label>
+            <input type="text" id="city" />
+          </div>
+
+          <div class="contactInfo">
+
+            <label for="zipCode">Postnummer: </label>
+            <input type="text" id="zipCode" />
+
+            <label for="cardNumber">Kortnummer: </label>
+            <input type="text" id="cardNumber" />
+
+            <label for="expMonth">Utgångsmånad: </label>
+            <input type="number" id="expMonth" />
+
+            <label for="expYear">Utgångsår: </label>
+            <input type="number" id="expYear" />
+
+            <label for="cvc">CVC: </label>
+            <input type="number" id="cvc" />
+          </div>
+        </div>
+        <div class="confirm">
+         
+          <button type="button" class="confirmBuy" id="confirmButton">
+            Bekräfta köp
+          </button>
+      
+      </form>
+    
+      <section>
+        <!-- The Modal -->
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="shoppingcart__wrapper">
+              <div class="shoppingcart">
+                <h3>Varukorg</h3>
+      
+                <div id="trashcan"><i class="fa-solid fa-trash"></i></div>
+      
+                <div class="shoppingcart__wrapper--item">
+                  <div id="candy__item" class="item">
+                </div>
+                <div class="summa">
+                  <h4>Summa</h4>
+                  <p id="item__summary"></p>
+                  
+                  <button id="paymentButton">Betala</button>
+                </div>
+              </div>
+      </div>
+      </section>
