@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { ChangeEvent, useState } from "react";
-import { BN_Navbar_Main } from '../../components/Navbar/BN_Navbar_Main';
+import { BN_Navbar_Home } from '../../components/Navbar/BN_Navbar_Home';
 import CleanerAdmin from "../../components/Admin/RN_cleanerAdmin";
 import OrderAdmin from "../../components/Admin/RN_orderAdmin";
 import { BN_AdminService } from "../../services/BN_admin.service";
@@ -59,6 +59,8 @@ const getAllOrders = async () => {
     };
 
 const openModalBooking = async (inputs:IOrders) => {
+        setIsMenu(inputs.menuDelivered);
+
         setInputs(values => ({...values,"_id": inputs._id}));
         setInputs(values => ({...values,"OrderDate": inputs.OrderDate}));
         setInputs(values => ({...values,"OrderTime": inputs.OrderTime}));
@@ -66,14 +68,17 @@ const openModalBooking = async (inputs:IOrders) => {
         setInputs(values => ({...values,"customerAddress": inputs.customerAddress}));
         setInputs(values => ({...values,"customerCity": inputs.customerCity}));
         setInputs(values => ({...values,"customerPhone": inputs.customerPhone}));
-        setInputs(values => ({...values,"menuDelivered": inputs.menuDelivered}));
+        setInputs(values => ({...values,"menuDelivered": isMenu}));
         setInputs(values => ({...values,"menuPrizeTotal": inputs.menuPrizeTotal}));
+       
     toggle()
     console.log(inputs)
     };
 
 
 const editOrder = async (inputs:IOrders) => {
+    
+    inputs.menuDelivered = isMenu;
     const response = await bn_AdminService.updateOrders(inputs);
     setUpdateOrder(response);
     console.log(response);
@@ -138,6 +143,12 @@ const deleteOrderLocal = async (orderId:string) => {
             setSearchRestaurantPassword(e.target.value);
           };       
 
+    const changeMenuDelivered =   (e: ChangeEvent<HTMLInputElement>) => {
+        setIsMenu ((prev) => !prev)
+           
+            };
+    
+
 // ********************************************************
 //  List All order for a Cleaner in Table
 // ********************************************************
@@ -153,6 +164,7 @@ const SearchOrderLoginItem = orderSearchLogin.map((orders) => (
         <th>Address</th>
         <th>Phone</th>
         <th>Prize</th>
+        <th>Done</th>
     </tr>
   </thead>
   <tbody>
@@ -162,7 +174,8 @@ const SearchOrderLoginItem = orderSearchLogin.map((orders) => (
         <td>{orders.customerName}</td>
         <td>{orders.customerAddress} &nbsp; {orders.customerCity} </td>
         <td>{orders.customerPhone}</td>
-        <td>{orders.cleanerPrize} </td>
+        <td>{orders.menuPrizeTotal} </td>
+        <td>{orders.menuDelivered.toString()} </td>
         <td>
          <span className = "itemButtonGroup">
             <button className = "itemButton" onClick={() => deleteOrderLocal((orders._id).toString())}>Delete</button>
@@ -181,7 +194,7 @@ return (
 <>
 
 
-<BN_Navbar_Main></BN_Navbar_Main>
+<BN_Navbar_Home></BN_Navbar_Home>
 
 <div className ="wrapper">
 
@@ -284,14 +297,14 @@ onChange = {handleChange}/>
 className="input"
 type ="checkbox"
 name="menuDelivered" checked = {isMenu}
-onChange = {() => setIsMenu ((prev) => !prev)}/></p>
+onChange = {changeMenuDelivered}/></p>
 </label>
 
 <label> Menu prize *:&nbsp;
 <input
 className="input"
 type ="number"
-value = {inputs.cleanerPrize}
+value = {inputs.menuPrizeTotal}
 name="menuPrizeTotal"
 required
 onChange = {handleChange}/>

@@ -25,39 +25,29 @@ export const BN_Navbar_Main = () => {
         </div>
 
         <ul className={`nav-menu ${isOpen ? "active" : ""}`}>
+
           <li className="nav-item" onClick={toggleMenu}>
-            <Link to="/BN_Main_Mobile" className="nav-link">
+            <Link to="/" className="nav-link">
               Home
             </Link>
           </li>
 
+          <li className="nav-item" onClick={toggleMenu}>
+            <Link to="/BN_Main_Mobile" className="nav-link">
+              Services
+            </Link>
+          </li>
+
+
           <li className="nav-item">
             <Link to="/BN_Main_Order" className="nav-link">
-              Book Service
+              Book
             </Link>
           </li>
 
           <li className="nav-item">
             <Link to="/BN_Payment" className="nav-link">
-              Payment
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/BN_Cleaner" className="nav-link">
-              Cleaner Login
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/BN_Menu" className="nav-link">
-              Restaurant Login
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/BN_AdminCleaner" className="nav-link">
-              Admin
+              Pay
             </Link>
           </li>
 

@@ -402,6 +402,8 @@ return (
 
 <BN_Navbar></BN_Navbar>
 
+<h2>****** For advanced users with database knowledge ******</h2>
+<br></br>
 
 <Modal isOpen={isOpen} toggle={toggle}>
 

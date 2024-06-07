@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { tableStatus } = require("../constants/table");
 const Schema = mongoose.Schema;
 const Cleaner = require("./BN_Cleaner");
 const Menu = require("./BN_Menu");

@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { ChangeEvent, useState } from "react";
 import { BN_Navbar_Main } from '../../components/Navbar/BN_Navbar_Main';
+import { BN_Navbar_Home } from '../../components/Navbar/BN_Navbar_Home';
 import CleanerAdmin from "../../components/Admin/RN_cleanerAdmin";
 import OrderAdmin from "../../components/Admin/RN_orderAdmin";
 import { BN_AdminService } from "../../services/BN_admin.service";
@@ -11,6 +12,7 @@ import { IOrders, INewOrders, IOrdersResponse} from "../../models/RN_Orders";
 
 import useModal from "../../hooks/useModal";
 import Modal from "../../components/Admin/bookingModal";
+import { boolean } from 'yup';
 
 
 const startOrder:IOrders = {
@@ -153,6 +155,7 @@ const SearchOrderLoginItem = orderSearchLogin.map((orders) => (
         <th>Address</th>
         <th>Phone</th>
         <th>Prize</th>
+        <th>Done</th>
     </tr>
   </thead>
   <tbody>
@@ -163,6 +166,7 @@ const SearchOrderLoginItem = orderSearchLogin.map((orders) => (
         <td>{orders.customerAddress} &nbsp; {orders.customerCity} </td>
         <td>{orders.customerPhone}</td>
         <td>{orders.cleanerPrize} </td>
+        <td>{orders.cleaningDone.toString()} </td>
         <td>
          <span className = "itemButtonGroup">
             <button className = "itemButton" onClick={() => deleteOrderLocal((orders._id).toString())}>Delete</button>
@@ -181,7 +185,7 @@ return (
 <>
 
 
-<BN_Navbar_Main></BN_Navbar_Main>
+<BN_Navbar_Home></BN_Navbar_Home>
     
 <div className ="wrapper">
 

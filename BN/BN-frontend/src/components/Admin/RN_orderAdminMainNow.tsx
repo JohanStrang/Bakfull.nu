@@ -5,9 +5,18 @@ import { BN_AdminService } from "../../services/BN_admin.service";
 import { IOrders, INewOrders} from "../../models/RN_Orders";
 import { ICleaners, INewCleaners} from "../../models/RN_Cleaners";
 import { IMenues } from '../../models/RN_Menues';
+import { Geolocation } from '../../components/Geolocation/geolocation';
+
+//******************************************************************** 
+//  Please note that his function is not completely developed
+//  If in production nt needs some further fine-tuning around address 
+//  from Geodata and also from check availability of Cleaner
+//  BUT Geodata Long and Lat is implemented and function important
+//  for the system if go live in the future
+//********************************************************************
 
 const startOrder:INewOrders = {
-"OrderDate": "",
+"OrderDate":"",
 "OrderTime": "",
 "customerName": "",
 "customerAddress": "",
@@ -29,7 +38,7 @@ const startOrder:INewOrders = {
 
 
 export default function OrderAdminMainNow() {
-
+ 
 const [isCleaning, setIsCleaning] = useState(false);
 const [isMenu, setIsMenu] = useState(false);
 const bn_AdminService = new BN_AdminService ();
@@ -48,71 +57,41 @@ const [cleanerDescription, setCleanerDescription] = useState("")
 const [restaurantName, setRestaurantName] = useState("")
 const [menues, setMenues] = useState<IMenues[]>([]);
 
-const getAllCleaners = async () => {
-    const cleaner = await bn_AdminService.getAllCleaners();
-    setCleaners(cleaner);
-    console.log(cleaner);
-    };
 
 const createNewOrder = async () => {
-    getAllCleaners();
-    getAllMenues();
     toggle();
 };
-
-const getCleanerById = async (tempCleanerId: string) => {
-    const tempSearch = await bn_AdminService.getCleanerById(tempCleanerId);
-    console.log(tempSearch.cleanerPrize)
-    setInputs(values => ({...values, "cleanerPrize": tempSearch.cleanerPrize}))
-    const tempOrderPrizeTotal = tempSearch.cleanerPrize + inputs.menuPrizeTotal
-    setInputs(values => ({...values, "orderPrizeTotal": tempOrderPrizeTotal}))
-    setCleanerDescription(tempSearch.cleanerDescription)
-    };
-
-const getMenuById = async (tempMenuId: string) => {
-        const tempSearch = await bn_AdminService.getMenuById(tempMenuId);
-        console.log(tempSearch.menuPrizeTotal)
-        setInputs(values => ({...values, "menuPrizeTotal": tempSearch.menuPrize}))
-        console.log(inputs.cleanerPrize)
-        const tempOrderPrizeTotal = inputs.cleanerPrize + tempSearch.menuPrize
-        setInputs(values => ({...values, "orderPrizeTotal": tempOrderPrizeTotal}))
-        setRestaurantName(tempSearch.restaurantName)
-        };
 
 const [isOpen, setIsOpen] = useState(false);
       
 function toggle() {
           setIsOpen((isOpen) => !isOpen);
         };
- 
-//Cleaner dropdown list
-const [selectedDropDownMenuValue, setSelectedDropDownMenuValue] = useState(''); 
 
-const getAllMenues = async () => {
-    const menu = await bn_AdminService.getAllMenues();
-    setMenues(menu);
-    console.log(menu);
-    };
 
+// Putting teh default values when teh person enter his/her name
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 const name = e.target.name;
 const value = e.target.value;
 setInputs(values => ({...values, [name]: value}))
+setInputs(values => ({...values, "menuPrizeTotal": 500}))
+inputs.OrderDate=new Date().toString()
+setInputs(values => ({...values, "OrderDate": inputs.OrderDate}))
+inputs.OrderTime=new Date().toString()
+setInputs(values => ({...values, "OrderTime": inputs.OrderTime}))
+inputs.customerAddress= "Geodata"
+setInputs(values => ({...values, "customerAddress": inputs.customerAddress}))
+inputs.cleanerId= "First available"
+setInputs(values => ({...values, "cleanerId": inputs.cleanerId}))
+inputs.cleanerPrize= 1200
+setInputs(values => ({...values, "cleanerPrize": inputs.cleanerPrize}))
+inputs.menuId= "First Available"
+setInputs(values => ({...values, "menuId": inputs.menuId}))
+inputs.menuPrizeTotal= 600
+setInputs(values => ({...values, "menuPrizeTotal": inputs.menuPrizeTotal}))
+inputs.orderPrizeTotal= 1800
+setInputs(values => ({...values, "orderPrizeTotal": inputs.orderPrizeTotal}))
 }
-
-const handleChangeSelectMenu = (e: ChangeEvent<HTMLSelectElement>) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs(values => ({...values, [name]: value}))
-    getMenuById(e.target.value)
-    }
-
-const handleChangeSelectCleaner = (e: ChangeEvent<HTMLSelectElement>) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setInputs(values => ({...values, [name]: value}))
-        getCleanerById(e.target.value)
-        }
 
 const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
 e.preventDefault();
@@ -138,21 +117,31 @@ addOrder()
     setInputs(values => ({...values,"menuDelivered": false}));
     setInputs(values => ({...values,"menuReview": ""}));
     setInputs(values => ({...values,"menuReviewComment": ""}));
+
+    alert("Your order at "+inputs.OrderDate+" has been confirmed. The Total prize is: "+inputs.orderPrizeTotal+" SEK." )
 }
 
 
 return (
 <>
 <div className="wrapper">
-  <h2>Welcome {inputs.customerName} to Bakfull.nu you will soon get help!</h2>
+
+<div className="intro">
+  <h2>Welcome {inputs.customerName} to Bakfull.nu!</h2>
   <br></br>
-  <button className = "searchButton" onClick={createNewOrder}>Order Cleaning!</button>
+  <p ><b>I need help as fast as possible and at the place I am now!</b></p>
+  <button className = "searchButton" onClick={createNewOrder}>Urgent booking!</button>
   <br></br>
   <br></br>
+  <p>If you want to selct time, place, what service and food you want to order in more detail or pre-book.</p>
+  <a href={'http://localhost:5173/BN_Main_Order'}>Press here!</a>
+  <br></br>
+  <br></br>
+</div>
 
   {isOpen && <form className="form" onSubmit ={handleSubmit}>  
 
-
+  <h4>Enter your name and phone number and the rest we fix...</h4>
   <input
   className="input"
   type ="text"
@@ -171,109 +160,27 @@ return (
   required
   onChange = {handleChange}/>
 
-  <label> Address:&nbsp;
+<h4>Booked today and as soon as possible</h4>
   <input
   className="input"
   type ="text"
-  placeholder='Address...'
-  value = {inputs.customerAddress}
-  name="customerAddress"
-  required
-  onChange = {handleChange}/>
-  </label>
-
-  <input
-  className="input"
-  type ="text"
-  placeholder='Postal Code...'
-  value = {inputs.customerPostalCode}
-  name="customerPostalCode"
-  onChange = {handleChange}/>
-
-  <input
-  className="input"
-  type ="text"
-  placeholder='City...'
-  value = {inputs.customerCity}
-  name="customerCity"
-  onChange = {handleChange}/>
-
-  <label> Date and time for Service:&nbsp;
-  <input
-  className="input"
-  type ="date"
   placeholder='Date...'
   value = {inputs.OrderDate}
   name="OrderDate"
-  required
-  onChange = {handleChange}/>
-  </label>
-
-  <input
-  className="input"
-  type ="time"
-  value = {inputs.OrderTime}
-  placeholder='Time...'
-  name="OrderTime"
-  required
-  onChange = {handleChange}/>
+  readOnly/>
 
 
-  <label> Book cleaning:&nbsp;
-  <select 
-        className="dropdown"
-        value={inputs.cleanerId}
-        name="cleanerId"
-        onChange={handleChangeSelectCleaner}
-        placeholder=''
-      > 
-        {cleaners.map(cleaner => ( 
-          <option key={cleaner._id} value={cleaner._id}> 
-            {cleaner.cleanerName} &nbsp; {cleaner.cleanerDescription}
-          </option> 
-        ))} 
-  </select> 
-  </label>
+  <h4>Gelocation of your current position</h4>
+  <Geolocation></Geolocation>
 
+
+<h4>Prize</h4>
   <input
   className="input"
   type ="number"
-  value = {inputs.cleanerPrize}
-  name="cleanerPrize"
-  onChange = {handleChange}/>
-
-  <label> Book food and drinks:&nbsp;
-  <select 
-        className="dropdown"
-        value={inputs.menuId}
-        name="menuId"
-        onChange={handleChangeSelectMenu}
-      > 
-        {menues.map(menu => ( 
-          <option key={menu._id} value={menu._id}> 
-            {menu.menuDescription} &nbsp; {menu.restaurantName}
-          </option> 
-        ))} 
-  </select> 
-  </label>
-
-  <input
-  className="input"
-  type ="number"
-  value = {inputs.menuPrizeTotal}
-  name="menuPrizeTotal"
-  onChange = {handleChange}/>
-
-  <label> Total prize:&nbsp;
-  <input
-  className="input"
-  type ="number"
+  readOnly
   value = {inputs.orderPrizeTotal}
-  name="orderPrizeTotal"
-  onChange = {handleChange}/>
-  </label>
-
-
+  name="orderPrizeTotal"/>
 
   <button
   className = "bookAdminButton"

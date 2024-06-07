@@ -13,6 +13,7 @@ import BN_SpecialAdminOrder from './pages/BN_Admin/BN_SpecialAdminOrder';
 
 import BN_Main_Mobile from './pages/Bakfull.nu Main/BN_Main_Mobile';
 import BN_MainOrder from './pages/Bakfull.nu Main/BN_Main_Order';
+import BN_MainOrderNow from './pages/Bakfull.nu Main/BN_Main_Order_Now';
 import { BN_Payment } from './pages/Bakfull.nu Main/BN_Payment';
 
 
@@ -65,6 +66,11 @@ export const router = createBrowserRouter([
   {
     path: '/BN_Main_Order',
     element: <BN_MainOrder></BN_MainOrder>,
+  },
+
+  {
+    path: '/BN_Main_Order_Now',
+    element: <BN_MainOrderNow></BN_MainOrderNow>,
   },
 
   {

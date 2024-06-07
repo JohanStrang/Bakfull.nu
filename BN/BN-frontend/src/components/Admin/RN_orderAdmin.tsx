@@ -1,7 +1,5 @@
 import ReactDOM from 'react-dom/client';
 import { ChangeEvent, useState, useEffect} from "react";
-import "./bookingAdmin.scss";
-
 import "./RN_Admin.scss";
 import { BN_AdminService } from "../../services/BN_admin.service";
 import { IOrders, INewOrders} from "../../models/RN_Orders";

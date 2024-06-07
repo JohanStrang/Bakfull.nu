@@ -2,9 +2,14 @@ require('dotenv').config();
 
 const mongoose = require('mongoose');
 
-//BN
-//const Cleaner = require('../src/models/BN_Cleaner.js');
-//const { cleaner } = require('./mockdata/BN_cleaner.js');
+
+// *********************************************************************************
+// NOTE!!!! DO NOT USE THIS TEST DATA SINCE THE CLEANER AND MENU ID ARE NOT CORRECT
+//          ONLY TO BE USED FOR INITIAL TESTING OF LISTING ETC. USE ADMIN PART
+//          OF THE SYSTEM TO CREATE NEW ORDERS
+// *********************************************************************************
+
+
 const Order = require('../src/models/BN_Order.js');
 const { order } = require('./mockdata/BN_order.js');
 

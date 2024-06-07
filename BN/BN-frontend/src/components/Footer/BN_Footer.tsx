@@ -10,21 +10,21 @@ import "./BN_Footer.scss";
 export const BN_Footer = () => {
   return (
     <>
+   
       <div className="footer-container">
+      
         <section className="footer-about">
-          <h2>Contact</h2>
+          <h3>Contact</h3>
           <div className="contact-container">
             <div>
-              <p>Phone: 070 99 99 999</p>
-              <p>Email: bn@gmail.com</p>
-              <p>
-                Adress: BNVägen 9 <br /> 199 99 BNStad
+              <p>Phone: 072 541 2222</p>
+              <p>Mail: info@bakfull.nu
               </p>
             </div>
           </div>
         </section>
         <section className="footer-icons">
-          <h2>Follow us</h2>
+          <h3>Follow us</h3>
           <div>
             <a href="https://www.youtube.com/" className="classes.youtube">
               <FontAwesomeIcon icon={faYoutube} size="2x"/>

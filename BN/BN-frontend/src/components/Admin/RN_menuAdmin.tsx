@@ -15,7 +15,7 @@ const startMenu:INewMenues = {
 "restaurantURL": "",
 "restaurantContact": "",
 "menuDescription": "",
-"menuPrize": 100,
+"menuPrize": 0,
 "restaurantUserName": "",
 "restaurantPassword": "",
 }
@@ -193,13 +193,16 @@ name="menuPrize"
 required
 onChange = {handleChange}/>
 </label>
-</div>
-</div>
-
 
 <button
 className = "bookAdminButton"
 type="submit">Save</button>
+
+</div>
+</div>
+
+
+
 <br></br>
 <br></br>
 

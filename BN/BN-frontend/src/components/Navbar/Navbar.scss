@@ -21,6 +21,24 @@ header {
   width: auto;
 }
 
+.navbarMain {
+  min-height: 12vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  // padding: 0 24px;
+  max-width: 500px;
+}
+
+.nav-menu-main {
+  width: 50%;
+  height: 150px;
+  margin:auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+}
 
 .nav-menu {
   min-width: 100%;
@@ -78,10 +96,10 @@ header {
     transform: translateY(-8px) rotate(-45deg);
   }
 
-  .nav-menu {
+  .nav-menu, .nav-menu-main {
     position: fixed;
     left: -800px;
-    top: 50px;
+    top: 40px;
     gap: 0;
     padding: 0px;
     flex-direction: column;
@@ -100,7 +118,7 @@ header {
     justify-content: center;
   }
 
-  .navbar {
+  .navbar, .navbarMain {
     //min-height: 10vh;
     justify-content: space-between;
   }

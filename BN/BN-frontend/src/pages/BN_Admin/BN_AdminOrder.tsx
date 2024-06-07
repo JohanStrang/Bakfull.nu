@@ -266,11 +266,6 @@ const SearchOrderCleanerIdItems = orderSearchCleanerId.map((orders) => (
         };    
     
 
-  //BN Search Menu Id
-  const handleChangeSearchMenuId = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchMenuId(e.target.value);
-  };
-
 
 const SearchOrderMenuIdtems = orderSearchMenuId.map((orders) => (
     <div className = "bookinItems" key={(orders._id.toString())} >
@@ -374,20 +369,6 @@ const value = e.target.value;
 setInputs(values => ({...values, [name]: value}))
 };
 
-const handleChangeSelectMenu = (e: ChangeEvent<HTMLSelectElement>) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs(values => ({...values, [name]: value}))
-    getMenuById(e.target.value)
-    }
-
-const handleChangeSelectCleaner = (e: ChangeEvent<HTMLSelectElement>) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setInputs(values => ({...values, [name]: value}))
-        getCleanerById(e.target.value)
-        }
-
 const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(inputs);
@@ -429,7 +410,7 @@ onChange = {handleChange}/>
 </label>
 
 
-<label> Customer:&nbsp;
+<label> Customer name:&nbsp;
 <input
 className="input"
 type ="text"
@@ -439,20 +420,25 @@ required
 onChange = {handleChange}/>
 </label>
 
+<label> Address:&nbsp;
 <input
 className="input"
 type ="text"
 value = {inputs.customerAddress}
 name="customerAddress"
 onChange = {handleChange}/>
+</label>
 
+<label> City:&nbsp;
 <input
 className="input"
 type ="text"
 value = {inputs.customerCity}
 name="customerCity"
 onChange = {handleChange}/>
+</label>
 
+<label> Phone:&nbsp;
 <input
 className="input"
 type ="text"
@@ -460,38 +446,7 @@ value = {inputs.customerPhone}
 name="customerPhone"
 required
 onChange = {handleChange}/>
-
-
-  <label> Book cleaning:&nbsp;
-  <select 
-        className="dropdown"
-        value={inputs.cleanerId}
-        name="cleanerId"
-        onChange={handleChangeSelectCleaner}
-        placeholder=''
-      > 
-        {cleaners.map(cleaner => ( 
-          <option key={cleaner._id} value={cleaner._id}> 
-            {cleaner.cleanerName} &nbsp; {cleaner.cleanerDescription}
-          </option> 
-        ))} 
-  </select> 
-  </label>
-
-  <label> Book food and drinks:&nbsp;
-  <select 
-        className="dropdown"
-        value={inputs.menuId}
-        name="menuId"
-        onChange={handleChangeSelectMenu}
-      > 
-        {menues.map(menu => ( 
-          <option key={menu._id} value={menu._id}> 
-            {menu.menuDescription} &nbsp; {menu.restaurantName}
-          </option> 
-        ))} 
-  </select> 
-  </label>
+</label>
 
 </div>
 
@@ -523,8 +478,6 @@ className="input"
 type ="checkbox"
 name="menuDelivered" checked = {isMenu}
 onChange = {() => setIsMenu ((prev) => !prev)}/></p>
-
-<br></br>
 
 <label> Cleaning prize:&nbsp;
 <input

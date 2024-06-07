@@ -138,20 +138,28 @@ addOrder()
     setInputs(values => ({...values,"menuDelivered": false}));
     setInputs(values => ({...values,"menuReview": ""}));
     setInputs(values => ({...values,"menuReviewComment": ""}));
+
+    alert("Your order at "+inputs.OrderDate+" has been confirmed. The Total prize is: "+inputs.orderPrizeTotal+" SEK." )
 }
 
 
 return (
 <>
 <div className="wrapper">
-  <h2>Welcome {inputs.customerName} to Bakfull.nu you will soon get help!</h2>
+
+<div className="intro">
+  <h2>Welcome {inputs.customerName} to Bakfull.nu!</h2>
   <br></br>
-  <button className = "searchButton" onClick={createNewOrder}>Order Cleaning!</button>
+  <p>Here you can selct time, place, what service and food you want to order!</p>
+  <button className = "searchButton" onClick={createNewOrder}>Book!</button>
   <br></br>
   <br></br>
+  <a href={'http://localhost:5173/BN_Main_Order_Now'}>Press here if you want URGENT help where you are now!</a>
+  <br></br>
+  <br></br>
+</div>
 
   {isOpen && <form className="form" onSubmit ={handleSubmit}>  
-
 
   <input
   className="input"

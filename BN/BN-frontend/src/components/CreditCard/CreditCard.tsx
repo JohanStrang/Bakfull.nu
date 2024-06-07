@@ -1,6 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import { ChangeEvent, useState, useEffect} from "react";
 import { BN_AdminService } from "../../services/BN_admin.service";
+import "../Admin/RN_Admin.scss"
+import { useHref } from 'react-router-dom';
+
 
 
 // Please note that this is prepared for implementaion put right now not 
@@ -15,6 +18,7 @@ const CreditCardForm = () => {
         });
       
 const [cardType, setCardType] = useState("");
+const [paymentDone, setCardPayment] = useState("");
 
 const getCardType = (number: any) => {
     const cardTypes = {
@@ -29,8 +33,6 @@ const getCardType = (number: any) => {
 
   // Use the getCardType function to set a class dynamically
   //const cardType = getCardType(cardInfo.number);
-
-
 
 
   const validateCardNumber = (number:string) => {
@@ -61,6 +63,15 @@ const getCardType = (number: any) => {
     setCardInfo({ ...cardInfo, [name]: formattedValue });
   };
   
+  const  backToBooking = async () => {
+    if (cardInfo.number != '' && cardInfo.name != '' && cardInfo.expiry != '' && cardInfo.cvc != '' ) {
+        setCardPayment("Payment done!");
+        }
+        else   {
+        setCardPayment("You have not entered a valid Credit Card!")
+      }
+    };
+
 
 return (
     <>
@@ -100,9 +111,14 @@ return (
       onChange={handleInputChange}
       placeholder="CVC"
     />
-    {/* Additional inputs and elements will be added here */}
 
-    <button>Payment</button>
+    <br></br>
+    <button className = "searchButton" onClick={backToBooking}>&nbsp;&nbsp;Pay&nbsp;&nbsp;</button>
+    <a href={'http://localhost:5173/BN_Main_Mobile'}>&nbsp;&nbsp;Back to Order&nbsp;&nbsp;</a>
+    
+
+
+    <h2>{paymentDone}</h2>
   </form>
 
   </>

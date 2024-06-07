@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+// *********************************************************************************
+// NOTE!!!! DO NOT USE THIS TEST DATA SINCE THE CLEANER AND MENU ID ARE NOT CORRECT
+//          ONLY TO BE USED FOR INITIAL TESTING OF LISTING ETC. USE ADMIN PART
+//          OF THE SYSTEM TO CREATE NEW ORDERS
+// *********************************************************************************
+
 exports.order = [
 
 

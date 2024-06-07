@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { ChangeEvent, useState, useEffect} from "react";
 import "./RN_Admin.scss";
-import "../Admin/bookingAdmin.scss";
 import { BN_AdminService } from "../../services/BN_admin.service";
 import { ICleaners, INewCleaners} from "../../models/RN_Cleaners";
 
@@ -64,25 +63,28 @@ return (
 <div className="row">
 <div className="column">
 
-<label> Cleaner:&nbsp;
+<h3>Cleaner</h3>
+
+<label> Cleaner name:&nbsp;
 <input
 className="input"
 type ="text"
-placeholder='Cleaner name...'
 value = {inputs.cleanerName}
 name="cleanerName"
 required
 onChange = {handleChange}/>
 </label>
 
+<label> Address:&nbsp;
 <input
 className="input"
 type ="text"
-placeholder='Cleaner address...'
 value = {inputs.cleanerAddress}
 name="cleanerAddress"
 onChange = {handleChange}/>
+</label>
 
+<label> Postal code:&nbsp;
 <input
 className="input"
 type ="text"
@@ -90,49 +92,82 @@ placeholder='Postal code...'
 value = {inputs.cleanerPostalCode}
 name="cleanerPostalCode"
 onChange = {handleChange}/>
+</label>
 
+<label> City:&nbsp;
 <input
 className="input"
 type ="text"
-placeholder='City...'
 value = {inputs.cleanerCity}
 name="cleanerCity"
 onChange = {handleChange}/>
+</label>
 
+<label> Phone:&nbsp;
 <input
 className="input"
 type ="text"
-placeholder='Phone...'
 value = {inputs.cleanerPhone}
 name="cleanerPhone"
 onChange = {handleChange}/>
+</label>
 
+<label> Web address:&nbsp;
 <input
 className="input"
 type ="text"
-placeholder='Homepage...'
 value = {inputs.cleanerURL}
 name="cleanerURL"
 onChange = {handleChange}/>
+</label>
 
+<label> Contact person:&nbsp;
 <input
 className="input"
 type ="text"
-placeholder='Cleaner contact...'
 value = {inputs.cleanerContact}
 name="cleanerContact"
 required
 onChange = {handleChange}/>
+</label>
 
 </div>
 
 <div className="column">  
 
-<label> Service Decription:&nbsp;
+
+
+<h3>User Admin</h3>
+
+<label> User Name:&nbsp;
 <input
 className="input"
 type ="text"
-placeholder='Cleaner description...'
+value = {inputs.cleanerUserName}
+name="cleanerUserName"
+required
+onChange = {handleChange}/>
+</label>
+
+<label> Password:&nbsp;
+<input
+className="input"
+type ="text"
+value = {inputs.cleanerPassword}
+name="cleanerPassword"
+required
+onChange = {handleChange}/>
+</label>
+
+<br></br>
+<br></br>
+
+<h3>Menu item</h3>
+
+<label> Cleaning Decription:&nbsp;
+<input
+className="input"
+type ="text"
 value = {inputs.cleanerDescription}
 name="cleanerDescription"
 required
@@ -143,32 +178,11 @@ onChange = {handleChange}/>
 <input
 className="input"
 type ="number"
-placeholder='Prize...'
 value = {inputs.cleanerPrize}
 name="cleanerPrize"
 required
 onChange = {handleChange}/>
 </label>
-
-<label> User Name and password:&nbsp;
-<input
-className="input"
-type ="text"
-placeholder='User name...'
-value = {inputs.cleanerUserName}
-name="cleanerUserName"
-required
-onChange = {handleChange}/>
-</label>
-
-<input
-className="input"
-type ="text"
-placeholder='Password...'
-value = {inputs.cleanerPassword}
-name="cleanerPassword"
-required
-onChange = {handleChange}/>
 
 </div>
 <button

@@ -15,11 +15,18 @@
 }
 
 .hero-wrapper {
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .hero-img {
   padding: 0.5rem;
+  max-width: 900px;
+  max-height: auto;
+}
+
+p {
+  text-align: center;
+  margin: 5px;
 }
 
 .sections-wrapper {
@@ -35,13 +42,12 @@
 
     h2 {
       padding-bottom: 4px;
-      text-decoration: underline;
-      text-underline-offset: 10px;
     }
 
     p {
       display: inline;
       padding: 0;
+      text-align: center;
     }
 
     span {
@@ -61,8 +67,6 @@
 
     h2 {
       padding-bottom: 4px;
-      text-decoration: underline;
-      text-underline-offset: 10px;
     }
 
     @media (max-width: 768px) {

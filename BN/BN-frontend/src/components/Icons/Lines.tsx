@@ -2,7 +2,7 @@ export const Lines = () => {
   return (
     <svg
       className="lines"
-      width="212"
+      width="350"
       height="6"
       viewBox="0 0 212 6"
       fill="none"

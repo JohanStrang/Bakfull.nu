@@ -2,15 +2,31 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  border-top: #737373 1px solid;
   padding: 0 2rem 0;
   font-size: 1rem;
   line-height: 20px;
   color: #737373;
-  font-family: "Montserrat Alternates", sans-serif;
-  font-family: "Raleway", sans-serif;
   font-weight: 500;
-  margin-top: 30px;
+  margin-top: 20px;
+  position: fixed;
+  height: 150px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+
+  @media (max-width: 768px) {
+    height: 150px;
+     }
+
+  h3, p
+  {
+  margin: 5px;
+
+  @media (max-width: 768px) {
+ font-size: 1rem;
+  }
+  }
 
   a {
     margin: 1rem;
@@ -29,22 +45,24 @@
 }
 
 .footer-about {
-  width: 50%;
+  width: 25%;
   padding: 10px;
   text-align: center;
   @media (max-width: 768px) {
     width: 100%; /* Change width to 100% on mobile */
+    height: 65px;
   }
 }
 
 .footer-icons {
-  width: 50%;
+  width: 25%;
   text-align: center;
   padding: 10px;
 
   @media (max-width: 768px) {
     width: 100%;
     text-align: center;
+    height: 120px;
   }
 }
 
